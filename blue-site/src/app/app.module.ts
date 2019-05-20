@@ -13,6 +13,7 @@ import { AcoPageComponent } from "./pages/aco/aco-page.component";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { LocalMaterialModule } from "./material.module";
+import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { LocalMaterialModule } from "./material.module";
     LocalMaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NgxMaterialTimepickerModule
   ],
   exports: [LocalMaterialModule],
   providers: [],
