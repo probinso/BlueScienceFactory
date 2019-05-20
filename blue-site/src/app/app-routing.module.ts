@@ -2,10 +2,12 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 import { HomePageComponent } from "./pages/home/home-page.component";
+import { AcoPageComponent } from "./pages/aco/aco-page.component";
 
 const routes: Routes = [
+  { path: "", redirectTo: "aco", pathMatch: "full" },
   { path: "home", component: HomePageComponent },
-  { path: "", redirectTo: "home", pathMatch: "full" }
+  { path: "aco", component: AcoPageComponent }
 ];
 
 @NgModule({
