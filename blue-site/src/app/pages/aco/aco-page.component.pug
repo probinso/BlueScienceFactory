@@ -1,9 +1,2 @@
 div(fxLayout="row wrap" fxLayoutGap="5px")
-    mat-form-field
-        input(matInput [matDatepicker]="datePicker" placeholder='Select a date' [(ngModel)]="queryDate")
-        mat-datepicker-toggle(matSuffix [for]="datePicker")
-        mat-datepicker(#datePicker)
-    mat-form-field
-        input(matInput [ngxTimepicker]="toggleTimepicker" placeholder="Select a time" readonly  [(ngModel)]="queryTime")
-        ngx-material-timepicker(#toggleTimepicker)
-    button(mat-button (click)="submitRequest()") Request
+    date-range-picker((result)="submitRequest($event)")
