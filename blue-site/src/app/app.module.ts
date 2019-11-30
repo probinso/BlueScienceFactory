@@ -4,7 +4,7 @@ import { CommonModule } from "@angular/common";
 import { DatePipe } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { AppRoutingModule } from "./app-routing.module";
 
@@ -15,12 +15,21 @@ import { AcoPageComponent } from "./pages/aco/aco-page.component";
 
 import { DateRangePickerComponent } from "./components/date-range-picker/date-range-picker.component";
 
+import { LoadingIndicatorService } from "./services/loading-indicator.service";
+
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { LocalMaterialModule } from "./material.module";
 import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
 
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from "ng-pick-datetime";
 import { NgxAudioPlayerModule } from "ngx-audio-player";
+import { TrafficInterceptorService } from "./services/traffic-interceptor.service";
+
+import {
+  FontAwesomeModule,
+  FaIconLibrary
+} from "@fortawesome/angular-fontawesome";
+import { faCoffee, fas } from "@fortawesome/free-solid-svg-icons";
 
 @NgModule({
   declarations: [
@@ -46,7 +55,20 @@ import { NgxAudioPlayerModule } from "ngx-audio-player";
     NgxAudioPlayerModule
   ],
   exports: [LocalMaterialModule],
-  providers: [DatePipe],
+  providers: [
+    DatePipe,
+    LoadingIndicatorService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TrafficInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas);
+    library.addIcons(faCoffee);
+  }
+}

@@ -1,2 +1,8 @@
-div(fxLayout="row wrap" fxLayoutGap="5px")
-    date-range-picker((result)="submitRequest($event)")
+div(fxLayout="column" fxLayoutGap="5px" width="100px")
+    div(fxLayout="row wrap" fxLayoutGap="5px")
+        date-range-picker((result)="submitRequest($event)")
+    mat-basic-audio-player(
+        *ngIf="audioUrl"
+        [audioUrl]="audioUrl"
+        [displayVolumeControls]="true"
+    )
