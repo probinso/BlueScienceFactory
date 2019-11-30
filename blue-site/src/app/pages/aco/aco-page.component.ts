@@ -7,29 +7,16 @@ import { SafeUrl } from "@angular/platform-browser";
   templateUrl: "./aco-page.component.html"
 })
 export class AcoPageComponent {
-  public endpoint: string;
   public audioUrl: SafeUrl;
   public queryDatetime: Date;
 
   constructor(private datepipe: DatePipe) {}
 
-  ngOnInit() {
-    this.updateEndpoint();
-    console.log(this.endpoint);
-  }
-
-  private updateEndpoint() {
+  get endpoint(): string {
     const formatdate = this.queryDatetime
       ? this.datepipe.transform(this.queryDatetime, "MM:dd:yyyy:HH:mm:ss")
       : "";
-    this.endpoint = `retrieve/${formatdate}`;
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.queryDatetime) {
-      console.log("!!!!");
-      this.updateEndpoint();
-    }
+    return `retrieve/${formatdate}`;
   }
 
   setUrl(audioUrl: SafeUrl) {
