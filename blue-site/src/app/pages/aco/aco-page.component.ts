@@ -13,10 +13,9 @@ export class AcoPageComponent {
   constructor(private datepipe: DatePipe) {}
 
   get endpoint(): string {
-    const formatdate = this.queryDatetime
+    return this.queryDatetime
       ? this.datepipe.transform(this.queryDatetime, "MM:dd:yyyy:HH:mm:ss")
       : "";
-    return `retrieve/${formatdate}`;
   }
 
   setUrl(audioUrl: SafeUrl) {

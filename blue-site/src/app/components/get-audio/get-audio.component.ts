@@ -15,6 +15,8 @@ export class GetAudioButton {
   private _blob: Blob;
 
   @Input() endpoint: string;
+  @Input() text: string = "Retrieve";
+  public disabled: boolean = false;
   @Output() audioUrl: EventEmitter<SafeUrl> = new EventEmitter();
 
   constructor(
@@ -23,7 +25,8 @@ export class GetAudioButton {
   ) {}
 
   submitRequest() {
-    const url = `${DOMAIN}/${this.endpoint}`;
+    this.disabled = true;
+    const url = `${DOMAIN}/retrieve/raw/${this.endpoint}`;
 
     console.log(`calling endpoint [${this.endpoint}]`);
     const httpOptions = {
@@ -49,6 +52,7 @@ export class GetAudioButton {
         );
         this.audioUrl.emit(audioUrl);
         this.getSubscription.unsubscribe();
+        this.disabled = false;
       }
     );
   }
