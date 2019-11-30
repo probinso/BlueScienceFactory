@@ -14,6 +14,7 @@ import { TeamPageComponent } from "./pages/team/team-page.component";
 import { AcoPageComponent } from "./pages/aco/aco-page.component";
 
 import { DateRangePickerComponent } from "./components/date-range-picker/date-range-picker.component";
+import { GetAudioButton } from "./components/get-audio/get-audio.component";
 
 import { LoadingIndicatorService } from "./services/loading-indicator.service";
 
@@ -37,7 +38,8 @@ import { faCoffee, fas } from "@fortawesome/free-solid-svg-icons";
     HomePageComponent,
     TeamPageComponent,
     AcoPageComponent,
-    DateRangePickerComponent
+    DateRangePickerComponent,
+    GetAudioButton
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,8 @@ import { faCoffee, fas } from "@fortawesome/free-solid-svg-icons";
     FlexLayoutModule,
     NgxMaterialTimepickerModule,
     HttpClientModule,
-    NgxAudioPlayerModule
+    NgxAudioPlayerModule,
+    FontAwesomeModule
   ],
   exports: [LocalMaterialModule],
   providers: [

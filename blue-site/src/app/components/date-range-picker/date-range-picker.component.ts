@@ -1,14 +1,21 @@
-import { Component, Output, EventEmitter } from "@angular/core";
+import { Component, Output, EventEmitter, Input } from "@angular/core";
 
 @Component({
   selector: "date-range-picker",
   templateUrl: "./date-range-picker.component.html"
 })
 export class DateRangePickerComponent {
-  public queryDatetime: Date;
-  @Output() result: EventEmitter<Date> = new EventEmitter();
+  public queryDatetimeValue: Date;
 
-  submit() {
-    this.result.emit(this.queryDatetime);
+  @Input()
+  get queryDatetime() {
+    return this.queryDatetimeValue;
+  }
+
+  @Output() queryDatetimeChange: EventEmitter<Date> = new EventEmitter();
+
+  set queryDatetime(val: Date) {
+    this.queryDatetimeValue = val;
+    this.queryDatetimeChange.emit(this.queryDatetimeValue);
   }
 }

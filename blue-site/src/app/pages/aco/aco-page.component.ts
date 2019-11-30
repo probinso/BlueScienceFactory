@@ -1,58 +1,39 @@
-import { Component } from "@angular/core";
+import { Component, SimpleChanges } from "@angular/core";
 import { DatePipe } from "@angular/common";
-import { HttpClient } from "@angular/common/http";
-import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
-
-// import { LoadingIndicatorService } from "src/app/services/loading-indicator.service";
-
-const DOMAIN = "http://127.0.0.1:5000";
+import { SafeUrl } from "@angular/platform-browser";
 
 @Component({
   selector: "aco-page",
   templateUrl: "./aco-page.component.html"
 })
 export class AcoPageComponent {
-  private _bytes: Blob[] = [];
-  private _blob: Blob;
+  public endpoint: string;
   public audioUrl: SafeUrl;
+  public queryDatetime: Date;
 
-  constructor(
-    private datepipe: DatePipe,
-    private httpClient: HttpClient,
-    private sanitizer: DomSanitizer
-  ) {}
+  constructor(private datepipe: DatePipe) {}
 
-  submitRequest(date: Date) {
-    const formatdate = date
-      ? this.datepipe.transform(date, "MM:dd:yyyy:HH:mm:ss")
+  ngOnInit() {
+    this.updateEndpoint();
+    console.log(this.endpoint);
+  }
+
+  private updateEndpoint() {
+    const formatdate = this.queryDatetime
+      ? this.datepipe.transform(this.queryDatetime, "MM:dd:yyyy:HH:mm:ss")
       : "";
-    const url = `${DOMAIN}/retrieve/${formatdate}`;
+    this.endpoint = `retrieve/${formatdate}`;
+  }
 
-    console.log(`calling [${url}]`);
-    const httpOptions = {
-      responseType: "arraybuffer" as "blob"
-    };
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.queryDatetime) {
+      console.log("!!!!");
+      this.updateEndpoint();
+    }
+  }
 
-    this.httpClient.get(url, httpOptions).subscribe(
-      response => {
-        console.log("on next");
-        this._bytes.push(response);
-      },
-      error => {
-        console.log("is an error");
-        console.log(error);
-      },
-      () => {
-        console.log("on complete");
-        this._blob = new Blob(this._bytes, {
-          type: "audio/x-wav"
-        });
-        console.log(this._blob);
-        this.audioUrl = this.sanitizer.bypassSecurityTrustUrl(
-          URL.createObjectURL(this._blob)
-        );
-        console.log(this.audioUrl);
-      }
-    );
+  setUrl(audioUrl: SafeUrl) {
+    console.log(`setting url [${audioUrl}]`);
+    this.audioUrl = audioUrl;
   }
 }
