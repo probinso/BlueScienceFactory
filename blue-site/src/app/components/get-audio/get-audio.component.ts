@@ -24,8 +24,16 @@ export class GetAudioButton {
     private sanitizer: DomSanitizer
   ) {}
 
+  private event(url: SafeUrl, disabled: boolean) {
+    if (!disabled) {
+      this.getSubscription.unsubscribe();
+    }
+    this.disabled = disabled;
+    this.audioUrl.emit(url);
+  }
+
   submitRequest() {
-    this.disabled = true;
+    this.event(undefined, true);
     const url = `${DOMAIN}/retrieve/raw/${this.endpoint}`;
 
     console.log(`calling endpoint [${this.endpoint}]`);
@@ -41,6 +49,7 @@ export class GetAudioButton {
       error => {
         console.log("is an error");
         console.log(error);
+        this.event(undefined, false);
       },
       () => {
         console.log("on complete");
@@ -50,9 +59,7 @@ export class GetAudioButton {
         const audioUrl = this.sanitizer.bypassSecurityTrustUrl(
           URL.createObjectURL(this._blob)
         );
-        this.audioUrl.emit(audioUrl);
-        this.getSubscription.unsubscribe();
-        this.disabled = false;
+        this.event(audioUrl, false);
       }
     );
   }
