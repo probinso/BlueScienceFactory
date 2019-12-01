@@ -27,6 +27,7 @@ export class GetAudioButton {
   private event(url: SafeUrl, disabled: boolean) {
     if (!disabled) {
       this.getSubscription.unsubscribe();
+      this._bytes = [];
     }
     this.disabled = disabled;
     this.audioUrl.emit(url);
