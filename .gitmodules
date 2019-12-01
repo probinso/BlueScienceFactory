@@ -1,0 +1,3 @@
+[submodule "blue-server/ACOio"]
+	path = blue-server/aco
+	url = git@github.com:probinso/ACOio.git
