@@ -6,16 +6,17 @@ import { DOMAIN } from "src/app/app.constants";
 import { Subscription } from "rxjs";
 
 @Component({
-  selector: "get-audio",
-  templateUrl: "./get-audio.component.html"
+  selector: "request-button",
+  templateUrl: "./request-button.component.html"
 })
-export class GetAudioButton {
+export class RequestButton {
   private getSubscription: Subscription;
   private _bytes: Blob[] = [];
   private _blob: Blob;
 
   @Input() endpoint: string;
   @Input() text: string = "Retrieve";
+  @Input() mimeType: string;
   public disabled: boolean = false;
   @Output() audioUrl: EventEmitter<SafeUrl> = new EventEmitter();
 
@@ -35,7 +36,7 @@ export class GetAudioButton {
 
   submitRequest() {
     this.event(undefined, true);
-    const url = `${DOMAIN}/retrieve/raw/${this.endpoint}`;
+    const url = `${DOMAIN}${this.endpoint}`;
 
     console.log(`calling endpoint [${this.endpoint}]`);
     const httpOptions = {
@@ -55,7 +56,7 @@ export class GetAudioButton {
       () => {
         console.log("on complete");
         this._blob = new Blob(this._bytes, {
-          type: "audio/x-wav"
+          type: this.mimeType
         });
         const audioUrl = this.sanitizer.bypassSecurityTrustUrl(
           URL.createObjectURL(this._blob)

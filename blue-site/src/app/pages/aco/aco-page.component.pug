@@ -2,7 +2,7 @@ div(fxLayout="column" fxLayoutGap="5px" width="100px")
     div(fxLayout="row wrap" fxLayoutGap="5px")
         input([owlDateTime]="datetimetag" [owlDateTimeTrigger]="datetimetag" placeholder="Date Time" [(ngModel)]="queryDatetime")
         owl-date-time(#datetimetag)
-        get-audio([endpoint]="endpoint" (audioUrl)="setUrl($event)")
+        request-button([endpoint]="endpoint" (audioUrl)="setUrl($event)" mimeType="audio/x-wav")
     mat-basic-audio-player(
         *ngIf="audioUrl"
         [audioUrl]="audioUrl"

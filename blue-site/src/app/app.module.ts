@@ -14,7 +14,7 @@ import { TeamPageComponent } from "./pages/team/team-page.component";
 import { AcoPageComponent } from "./pages/aco/aco-page.component";
 
 import { DateRangePickerComponent } from "./components/date-range-picker/date-range-picker.component";
-import { GetAudioButton } from "./components/get-audio/get-audio.component";
+import { RequestButton } from "./components/request-button/request-button.component";
 
 import { LoadingIndicatorService } from "./services/loading-indicator.service";
 
@@ -39,7 +39,7 @@ import { faCoffee, fas } from "@fortawesome/free-solid-svg-icons";
     TeamPageComponent,
     AcoPageComponent,
     DateRangePickerComponent,
-    GetAudioButton
+    RequestButton
   ],
   imports: [
     BrowserModule,

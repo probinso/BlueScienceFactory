@@ -13,9 +13,11 @@ export class AcoPageComponent {
   constructor(private datepipe: DatePipe) {}
 
   get endpoint(): string {
-    return this.queryDatetime
+    const datestr = this.queryDatetime
       ? this.datepipe.transform(this.queryDatetime, "MM:dd:yyyy:HH:mm:ss")
       : "";
+
+    return `/retrieve/raw/${datestr}`;
   }
 
   setUrl(audioUrl: SafeUrl) {

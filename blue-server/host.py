@@ -29,7 +29,7 @@ def retrieve(
     timestamp = datetime.strptime(timestr, "%m:%d:%Y:%H:%M:%S")
     try:
         result = aco.load(timestamp)
-        filtered = result.resample_fs(1600)
+        filtered = result
 
         def stream(io, step=4096):
             print("stream start", file=stderr)
