@@ -19,6 +19,7 @@ export class RequestButton {
   @Input() mimeType: string;
   public disabled: boolean = false;
   @Output() audioUrl: EventEmitter<SafeUrl> = new EventEmitter();
+  @Output() datatoken: EventEmitter<string> = new EventEmitter();
 
   constructor(
     private httpClient: HttpClient,

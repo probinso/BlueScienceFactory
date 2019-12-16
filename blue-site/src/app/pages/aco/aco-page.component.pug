@@ -1,10 +1,16 @@
 div(fxLayout="column" fxLayoutGap="5px" width="100px")
     div(fxLayout="row wrap" fxLayoutGap="5px")
-        input([owlDateTime]="datetimetag" [owlDateTimeTrigger]="datetimetag" placeholder="Date Time" [(ngModel)]="queryDatetime")
+        input(
+            [owlDateTime]="datetimetag" [owlDateTimeTrigger]="datetimetag"
+            placeholder="Date Time" [(ngModel)]="queryDatetime")
         owl-date-time(#datetimetag)
-        request-button([endpoint]="endpoint" (audioUrl)="setUrl($event)" mimeType="audio/x-wav")
-    mat-basic-audio-player(
-        *ngIf="audioUrl"
-        [audioUrl]="audioUrl"
-        [displayVolumeControls]="true"
-    )
+        request-button(
+            [endpoint]="rawendpoint"
+            (audioUrl)="setUrl($event)"
+            mimeType="image/png")
+    img(*ngIf="audioUrl" [src]="audioUrl")
+    //- mat-basic-audio-player(
+    //-     *ngIf="audioUrl"
+    //-     [audioUrl]="audioUrl"
+    //-     [displayVolumeControls]="true"
+    //- )
